@@ -19,7 +19,7 @@ const SidebarData: SidebarDataType[] = [
     id: 1,
     description: "Analytics",
     icon: ChartLineUp,
-    path: "/subjects",
+    path: "/analytics",
   },
   {
     id: 2,
@@ -37,7 +37,7 @@ const SidebarData: SidebarDataType[] = [
     id: 4,
     description: "Vendas",
     icon: ShoppingCart,
-    path: "/students",
+    path: "/subjects",
   },
   {
     id: 5,
