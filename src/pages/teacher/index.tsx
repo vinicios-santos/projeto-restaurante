@@ -1,10 +1,9 @@
-import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-import TeacherWindow from "../components/teacher/TeacherWindow";
+import TeacherWindow from "@components/teacher/TeacherWindow";
 
-import UserTable from "../components/user/UserTable";
-import { usersRoles } from "../utils/usersEnum";
+import UserTable from "@components/user/UserTable";
+import { usersRoles } from "@utils/usersEnum";
 const Teacher = () => {
   const [searchText, setSearchText] = useState("");
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);

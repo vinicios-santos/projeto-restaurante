@@ -23,10 +23,10 @@
     /* Path mapping */
     "baseUrl": "./src",
     "paths": {
-      "@components": ["./components/*"],
-      "@pages": ["./pages/*"],
-      "@hooks": ["./hooks/*"],
-      "@utils": ["./utils/*"]
+      "@components/*": ["components/*"],
+      "@pages/*": ["pages/*"],
+      "@hooks/*": ["hooks/*"],
+      "@utils/*": ["utils/*"]
     }
   },
 

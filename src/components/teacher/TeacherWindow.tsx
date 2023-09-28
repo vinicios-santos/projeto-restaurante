@@ -1,7 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useState } from "react";
-import { queryClient } from "../../App";
+import { queryClient } from "@utils/queryClient";
+
 import enviroment from "../../environments/enviroment";
 import GenericWindow from "../base/GenericWindow";
 

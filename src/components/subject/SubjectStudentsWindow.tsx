@@ -2,7 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { CircleNotch } from "phosphor-react";
 import { useEffect, useState } from "react";
-import { queryClient } from "../../App";
+import { queryClient } from "@utils/queryClient";
+
 import enviroment from "../../environments/enviroment";
 import { subject } from "../../hooks/useGetSubjects";
 import GenericLoading from "../base/GenericLoading";

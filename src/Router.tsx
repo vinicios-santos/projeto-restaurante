@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
-import Analytics from "./pages/Analytics";
-import Home from "./pages/Home";
-import Student from "./pages/Student";
-import Subject from "./pages/Subject";
-import Teacher from "./pages/Teacher";
+import Analytics from "./pages/analytics";
+import Home from "./pages/home";
+import Student from "./pages/student";
+import Subject from "./pages/subject";
+import Teacher from "./pages/teacher";
 
 export default function Router() {
   return (

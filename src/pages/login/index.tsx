@@ -2,8 +2,8 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { Eye, EyeSlash, SignIn } from "phosphor-react";
 import React, { useEffect, useState } from "react";
-import Logo from "../components/base/Logo";
-import enviroment from "../environments/enviroment";
+import Logo from "@components/base/Logo";
+import enviroment from "../../environments/enviroment";
 
 type user = {
   email: string;
