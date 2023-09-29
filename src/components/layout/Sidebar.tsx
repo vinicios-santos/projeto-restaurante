@@ -4,17 +4,17 @@ import { ArrowLeft, ArrowRight, SignOut } from "phosphor-react";
 import { useState } from "react";
 import classNames from "classnames";
 import Logo from "../base/Logo";
+import useAuth from "@hooks/auth";
 
-const Sidebar = ({ setAuthToken }: any) => {
+const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const { signOut } = useAuth();
   const collapseSidebar = () => {
     setIsCollapsed(!isCollapsed);
   };
 
   const handleLogOut = () => {
-    localStorage.setItem("@authToken", "");
-
-    setAuthToken("");
+    signOut();
   };
 
   return (

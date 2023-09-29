@@ -3,11 +3,12 @@ import { PrivateRoutes } from "./privateRoutes";
 import { PublicRoutes } from "./publicRoutes";
 
 export default function Router() {
-    const auth = false
-    const router = createBrowserRouter([
-        auth ? PrivateRoutes() : {},
-        ...PublicRoutes(auth),
-    ]);
+  const user = localStorage.getItem("user");
 
-    return <RouterProvider router={router} />
+  const router = createBrowserRouter([
+    user ? PrivateRoutes() : {},
+    ...PublicRoutes(!!user),
+  ]);
+
+  return <RouterProvider router={router} />;
 }

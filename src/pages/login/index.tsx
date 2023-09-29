@@ -1,92 +1,68 @@
-import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
 import { Eye, EyeSlash, SignIn } from "phosphor-react";
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import Logo from "@components/base/Logo";
-import enviroment from "../../environments/enviroment";
+import { useForm, SubmitHandler } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import useAuth from "@hooks/auth";
 
-type user = {
+type LoginFormType = {
   email: string;
   password: string;
 };
 
-function Login({ setAuthToken }: any) {
-  const [theme, setTheme] = useState(localStorage.getItem("theme"));
-  useEffect(() => {
-    setTheme(localStorage.getItem("theme"));
-  }, []);
+const formSchema = yup.object({
+  email: yup.string().required("Você precisa informar seu email"),
+  password: yup.string().required("Você precisa informar sua senha"),
+});
 
-  const [user, setUser] = useState<user>({
-    email: "",
-    password: "",
+// Adicionei validacao, com o errors.objeto.message tem a mensagem de erro do yup, da pra fazer uma label
+function Login() {
+  const { signIn } = useAuth();
+  const [passwordShown, setPasswordShown] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormType>({
+    resolver: yupResolver(formSchema),
+    defaultValues: import.meta.env.DEV
+      ? {
+          email: "admteste@gmail.com",
+          password: "senha123",
+        }
+      : {},
   });
 
-  const [passwordShown, setPasswordShown] = useState(false);
-
-  const mutation = useMutation(
-    (u: user) => axios.post(`${enviroment.railway}login/`, u),
-    {
-      onSuccess: (response) => {
-        if (!response.data || response.data.status !== "success")
-          return alert("E-mail ou senha inválidos");
-
-        if (response.data.permission !== 1)
-          return alert("Você só pode entrar com um perfil de administrador");
-
-        const authToken = `Bearer ${response.data.token}`;
-
-        localStorage.setItem("@authToken", authToken);
-
-        setAuthToken(authToken);
-      },
-    }
-  );
-
-  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    mutation.mutate({ ...user });
-  };
-
-  const handleChangeUser = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    const name = e.target.name;
-
-    setUser({
-      ...user,
-      [name]: e.target.value,
-    });
+  const onSubmit: SubmitHandler<LoginFormType> = (data) => {
+    signIn(data);
   };
 
   return (
     <div className="grid place-items-center h-screen">
       <div className="card w-[500px] bg-neutral shadow-xl">
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-control">
             <div className="card-body">
-              <div
-                className="flex justify-center h-[10rem] w-full"
-                id={theme === "dark" ? "invert-logo" : ""}
-              >
+              <div className="flex justify-center h-[10rem] w-full">
                 <Logo />
               </div>
+
               <input
                 type="email"
-                name="email"
-                value={user.email}
                 placeholder="E-mail"
-                onChange={handleChangeUser}
                 required
                 className="input input-bordered w-full mb-4"
+                {...register("email")}
               />
+
               <div className="flex">
                 <input
                   type={passwordShown ? "text" : "password"}
-                  name="password"
-                  value={user.password}
                   placeholder="Senha"
-                  onChange={handleChangeUser}
                   required
                   className="input input-bordered w-full"
+                  {...register("password")}
                 />
                 {passwordShown ? (
                   <Eye
@@ -102,6 +78,7 @@ function Login({ setAuthToken }: any) {
                   />
                 )}
               </div>
+
               <div className="card-actions justify-center">
                 <button className="btn btn-success">
                   Entrar &nbsp;&nbsp;
