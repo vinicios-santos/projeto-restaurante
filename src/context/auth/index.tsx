@@ -11,7 +11,7 @@ type SignInCredentials = {
 
 interface AuthContextData {
   signIn: (credentials: SignInCredentials) => Promise<void>;
-  signOut: () => void;
+  signOut: () => Promise<void>;
 }
 
 interface AuthProviderProps {
@@ -25,30 +25,34 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const { "yellowsoftware.token": token } = parseCookies();
     if (!token) {
       localStorage.clear();
-      redirect("/");
     }
   }, []);
 
-  function signOut() {
+  async function signOut() {
     destroyCookie(undefined, "yellowsoftware.token");
     redirect("/");
   }
 
   async function signIn({ email, password }: SignInCredentials) {
-    // criar tratativa de erroo
     const response = await api.post("Login/Authenticate", {
       email,
       senha: password,
     });
-    const { body: token } = response.data;
+    const { body: token, success, reasonPhrase } = response.data;
+
+    if (!success) {
+      throw new Error(reasonPhrase);
+    }
+
     localStorage.setItem("token", JSON.stringify(token));
+
     setCookie(undefined, "yellowsoftware.token", token, {
       maxAge: 60 * 60,
       path: "/",
     });
 
     api.defaults.headers["Authorization"] = `${token}`;
-    redirect("/dashboard");
+    redirect("/analytics");
   }
 
   return (

@@ -13,7 +13,7 @@ const Sidebar = () => {
     setIsCollapsed(!isCollapsed);
   };
 
-  const handleLogOut = () => {
+  const handleLogOut = async () => {
     signOut();
   };
 

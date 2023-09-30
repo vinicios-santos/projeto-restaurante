@@ -28,14 +28,19 @@ function Login() {
     resolver: yupResolver(formSchema),
     defaultValues: import.meta.env.DEV
       ? {
-          email: "admteste@gmail.com",
+          email: "teste@gmail.com.br",
           password: "senha123",
         }
       : {},
   });
 
-  const onSubmit: SubmitHandler<LoginFormType> = (data) => {
-    signIn(data);
+  const onSubmit: SubmitHandler<LoginFormType> = async (data) => {
+    try {
+      await signIn(data);
+    } catch (error) {
+      // tratar aqui o erro retornado da api
+      console.error(error);
+    }
   };
 
   return (
@@ -55,6 +60,8 @@ function Login() {
                 className="input input-bordered w-full mb-4"
                 {...register("email")}
               />
+              {/* mostrar aqui o erro */}
+              <p>{errors.email?.message}</p>
 
               <div className="flex">
                 <input

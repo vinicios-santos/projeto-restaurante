@@ -16,7 +16,7 @@ const useFilterData = (
       return dataValues.includes(searchText.toLowerCase());
     });
     setFilterData(filteredData);
-  }, [searchText]);
+  }, [searchText, dataToFilter]);
 
   return filterData;
 };

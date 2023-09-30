@@ -17,7 +17,7 @@ const UserTable = ({ searchText, role, reload }: Props) => {
 
   useEffect(() => {
     if (reload) refetch().then();
-  }, [reload]);
+  }, [reload, refetch]);
 
   if (isLoading) return <GenericLoading size={60} />;
   if (error) return <div>ERRO</div>;

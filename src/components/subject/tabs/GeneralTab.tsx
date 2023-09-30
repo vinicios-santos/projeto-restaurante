@@ -11,11 +11,7 @@ const GeneralTab = ({
   tagId,
   setTagId,
 }: any) => {
-  const {
-    data: teachers,
-    error,
-    isLoading,
-  } = useGetUsersByRole(usersRoles.teacher);
+  const { data: teachers, isLoading } = useGetUsersByRole(usersRoles.teacher);
 
   if (isLoading) return <GenericLoading size={60} />;
 

@@ -104,7 +104,7 @@ const StudentWindow = ({ isOpen, setIsOpen }: Props) => {
             <input
               type="checkbox"
               checked={isTeacher}
-              onChange={(e) => setIsTeacher(!isTeacher)}
+              onChange={() => setIsTeacher(!isTeacher)}
               className="checkbox"
             />
           </div>

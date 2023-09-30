@@ -6,14 +6,14 @@ import Subject from "@pages/subject";
 import Teacher from "@pages/teacher";
 
 export const PrivateRoutes = () => {
-    return {
-        element: <Layout />,
-        children: [
-            { path: '/dashboard', element: <Home /> },
-            { path: "/subjects", element: <Subject /> },
-            { path: "/teachers", element: <Teacher /> },
-            { path: "/students", element: <Student /> },
-            { path: "/Analytics", element: <Analytics /> }
-        ]
-    }
-}
+  return {
+    element: <Layout />,
+    children: [
+      { path: "/dashboard", element: <Home /> },
+      { path: "/subjects", element: <Subject /> },
+      { path: "/teachers", element: <Teacher /> },
+      { path: "/students", element: <Student /> },
+      { path: "/analytics", element: <Analytics /> },
+    ],
+  };
+};
