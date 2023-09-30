@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
 import { useState } from "react";
 import { queryClient } from "@utils/queryClient";
 import enviroment from "../../environments/enviroment";
 import GenericWindow from "../base/GenericWindow";
+import api from "@utils/api";
 
 type student = {
   name: string;
@@ -30,7 +30,7 @@ const StudentWindow = ({ isOpen, setIsOpen }: Props) => {
   const [isTeacher, setIsTeacher] = useState<boolean>(false);
 
   const mutation = useMutation(
-    (s: student) => axios.post(`${enviroment.railway}adm/new_user/`, s),
+    (s: student) => api.post(`${enviroment.railway}adm/new_user/`, s),
     {
       onSuccess: async () => {
         await queryClient.invalidateQueries(["getStudents"]);

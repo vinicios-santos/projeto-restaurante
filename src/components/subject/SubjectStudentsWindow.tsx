@@ -1,14 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { CircleNotch } from "phosphor-react";
 import { useEffect, useState } from "react";
-import { queryClient } from "@utils/queryClient";
 
 import enviroment from "../../environments/enviroment";
 import { subject } from "../../hooks/useGetSubjects";
 import GenericLoading from "../base/GenericLoading";
 import GenericTable from "../base/GenericTable";
 import GenericWindow from "../base/GenericWindow";
+import api from "@utils/api";
 
 type Props = {
   isOpen: boolean;
@@ -18,7 +15,7 @@ type Props = {
 
 const getStudentInSubject = (id: number) => {
   if (!id) return;
-  return axios
+  return api
     .get(`${enviroment.railway}educator/list/students/${id}/`)
     .then(({ data }) => data);
 };

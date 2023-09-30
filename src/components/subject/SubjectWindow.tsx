@@ -1,11 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
 import { useState } from "react";
 import { queryClient } from "@utils/queryClient";
 
 import enviroment from "../../environments/enviroment";
 import GenericWindow from "../base/GenericWindow";
 import SubjectTabs from "./SubjectTabs";
+import api from "@utils/api";
 
 type Props = {
   isOpen: boolean;
@@ -34,7 +34,7 @@ const SubjectWindow = ({ isOpen, setIsOpen }: Props) => {
   const [callNumbers, setCallNumbers] = useState<number>(0);
 
   const mutation = useMutation(
-    (s: Subject) => axios.post(`${enviroment.railway}adm/new_subject/`, s),
+    (s: Subject) => api.post(`${enviroment.railway}adm/new_subject/`, s),
     {
       onSuccess: async () => {
         await queryClient.invalidateQueries(["getSubjects"], { type: "all" });

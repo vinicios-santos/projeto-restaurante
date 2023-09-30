@@ -1,12 +1,8 @@
 import { useEffect } from "react";
-import { createContext, useState } from "react";
+import { createContext } from "react";
 import { setCookie, parseCookies, destroyCookie } from "nookies";
 import api from "@utils/api";
 import { redirect } from "react-router-dom";
-
-type User = {
-  name: string;
-};
 
 type SignInCredentials = {
   email: string;
@@ -40,23 +36,18 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   async function signIn({ email, password }: SignInCredentials) {
     // criar tratativa de erroo
-    const response = await api.post("login/", {
+    const response = await api.post("Login/Authenticate", {
       email,
-      password,
+      senha: password,
     });
-    const { nome: name, token } = response.data;
-    const localUser = {
-      name,
-    };
-
-    localStorage.setItem("user", JSON.stringify(localUser));
-
+    const { body: token } = response.data;
+    localStorage.setItem("token", JSON.stringify(token));
     setCookie(undefined, "yellowsoftware.token", token, {
       maxAge: 60 * 60,
       path: "/",
     });
 
-    api.defaults.headers["Authorization"] = `Bearer ${token}`;
+    api.defaults.headers["Authorization"] = `${token}`;
     redirect("/dashboard");
   }
 
