@@ -54,7 +54,7 @@ const Select = ({ data, displayValue, value, setValue }: any) => {
                     }
                     value={person}
                   >
-                    {({ selected, active }) => (
+                    {({ selected }) => (
                       <>
                         <span
                           className={`block truncate ${

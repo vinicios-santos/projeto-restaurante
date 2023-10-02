@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import SubjectWindow from "../components/subject/SubjectWindow";
-import SubjectTable from "../components/subject/SubjectTable";
+import SubjectWindow from "@components/subject/SubjectWindow";
+import SubjectTable from "@components/subject/SubjectTable";
 
 function Subject() {
   const [searchText, setSearchText] = useState("");

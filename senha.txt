@@ -1,4 +1,0 @@
-email: admteste@gmail.com
-senha: senha123
-
-ver possibilidade de usar o 'react-hot-toast' para notificações

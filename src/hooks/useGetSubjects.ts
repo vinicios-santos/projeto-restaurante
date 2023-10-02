@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import enviroment from "../environments/enviroment";
+import api from "@utils/api";
 
 export type subject = {
   id: number;
@@ -16,7 +16,7 @@ const useGetSubjects = () => {
 
 const getSubjects = () => {
   return (): Promise<subject[]> =>
-    axios
+    api
       .get(`${enviroment.railway}adm/getall/subject/`)
       .then(({ data }) => data);
 };

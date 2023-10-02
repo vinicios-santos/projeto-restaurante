@@ -4,7 +4,6 @@ import useFilterData from "../../hooks/useFilterData";
 import useGetSubjects from "../../hooks/useGetSubjects";
 import GenericLoading from "../base/GenericLoading";
 import GenericTable from "../base/GenericTable";
-import GenericWindow from "../base/GenericWindow";
 import SubjectStudentsWindow from "./SubjectStudentsWindow";
 
 type Props = {
@@ -20,7 +19,7 @@ const SubjectTable = ({ searchText, reload }: Props) => {
 
   useEffect(() => {
     if (reload) refetch().then();
-  }, [reload]);
+  }, [reload, refetch]);
 
   if (isLoading) return <GenericLoading size={60} />;
   if (error) return <div>ERRO</div>;

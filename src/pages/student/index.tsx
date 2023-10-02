@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import StudentWindow from "../components/student/StudentWindow";
-import UserTable from "../components/user/UserTable";
-import { usersRoles } from "../utils/usersEnum";
+import StudentWindow from "@components/student/StudentWindow";
+import UserTable from "@components/user/UserTable";
+import { usersRoles } from "@utils/usersEnum";
 
 const Student = () => {
   const [searchText, setSearchText] = useState("");

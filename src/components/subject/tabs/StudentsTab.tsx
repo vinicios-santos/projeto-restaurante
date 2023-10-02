@@ -7,11 +7,7 @@ import GenericLoading from "../../base/GenericLoading";
 
 const StudentsTab = ({ studentsList, setStudentsList }: any) => {
   const [selected, setSelected] = useState<any>();
-  const {
-    data: students,
-    error,
-    isLoading,
-  } = useGetUsersByRole(usersRoles.student);
+  const { data: students, isLoading } = useGetUsersByRole(usersRoles.student);
 
   const handleAddAlunosList = () => {
     if (!selected.id)

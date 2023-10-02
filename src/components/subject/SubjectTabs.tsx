@@ -1,5 +1,4 @@
 import { Tab } from "@headlessui/react";
-import { useState } from "react";
 import GeneralTab from "./tabs/GeneralTab";
 import MeetsTab from "./tabs/MeetsTab";
 import StudentsTab from "./tabs/StudentsTab";

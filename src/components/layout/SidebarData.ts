@@ -1,4 +1,3 @@
-import React, { ReactComponentElement } from "react";
 import { ChartLineUp, Bell, ClipboardText, Kanban, ShoppingCart, AppWindow, Gear, ChatCenteredDots } from "phosphor-react";
 
 type SidebarDataType = {

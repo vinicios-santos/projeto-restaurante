@@ -1,6 +1,6 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import { useMutation } from "@tanstack/react-query";
 import enviroment from "../environments/enviroment";
+import api from "@utils/api";
 
 type user = {
   id: number;
@@ -18,7 +18,7 @@ const usePostUser = (user: user) => {
 
 const postUser = (user: user) => {
   return () =>
-    axios
+    api
       .post(`${enviroment.railway}adm/new_user/`, user)
       .then(({ data }) => data);
 };

@@ -1,15 +1,12 @@
-import {  Clock } from "phosphor-react";
+import { Clock } from "phosphor-react";
 import "./GraphicChart.modules.css";
-import React, { PureComponent } from "react";
+import { PureComponent } from "react";
 import {
   BarChart,
   Bar,
-  Cell,
   XAxis,
   YAxis,
-  CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
 } from "recharts";
 
@@ -53,19 +50,25 @@ const data = [
 ];
 
 type CustomTooltipProps = {
-    active?: boolean;
-    payload?: any;
-    label?: string;
-}
+  active?: boolean;
+  payload?: any;
+  label?: string;
+};
 
 const CustomTooltip = ({ active, payload, label }: CustomTooltipProps) => {
   if (active && payload && payload.length) {
     return (
       <div className="custom-tooltip graphicchart">
         <div>
-            <p className="label"><Clock size={18} />{`${label}`}</p>  
+          <p className="label">
+            <Clock size={18} />
+            {`${label}`}
+          </p>
         </div>
-        <p className="intro"><a>&nbsp;R$&nbsp;&nbsp;&nbsp;</a>{`${payload[0].value}`}</p>
+        <p className="intro">
+          <a>&nbsp;R$&nbsp;&nbsp;&nbsp;</a>
+          {`${payload[0].value}`}
+        </p>
       </div>
     );
   }
@@ -74,24 +77,28 @@ const CustomTooltip = ({ active, payload, label }: CustomTooltipProps) => {
 };
 
 const CustomYAxisTick = (props) => {
-    const { x, y, payload } = props;
-    const formattedValue = `R$ ${payload.value.toFixed(2)}`;
-  
-    return (
-      <g transform={`translate(${x},${y})`}>
-        <text x={-55} y={0} dy={-5} textAnchor="end" fill="#ffdf29">
-          {formattedValue}
-        </text>
-      </g>
-    );
-  };
+  const { x, y, payload } = props;
+  const formattedValue = `R$ ${payload.value.toFixed(2)}`;
+
+  return (
+    <g transform={`translate(${x},${y})`}>
+      <text x={-55} y={0} dy={-5} textAnchor="end" fill="#ffdf29">
+        {formattedValue}
+      </text>
+    </g>
+  );
+};
 
 export default class GraphicChart extends PureComponent {
   static demoUrl = "https://codesandbox.io/s/simple-bar-chart-tpz8r";
 
   render() {
     return (
-      <ResponsiveContainer width="95%" height="60%" className="GraphicChartContainer">
+      <ResponsiveContainer
+        width="95%"
+        height="60%"
+        className="GraphicChartContainer"
+      >
         <BarChart
           width={500}
           height={300}
@@ -106,7 +113,7 @@ export default class GraphicChart extends PureComponent {
         >
           <XAxis fill="#d4a90b" dataKey="name" />
           <YAxis fill="#d4a90b" tick={<CustomYAxisTick />} />
-          <Tooltip cursor={{fill: '#464545'}} content={<CustomTooltip />} />
+          <Tooltip cursor={{ fill: "#464545" }} content={<CustomTooltip />} />
           <Bar dataKey="Valor" fill="#d4a90b" />
         </BarChart>
       </ResponsiveContainer>

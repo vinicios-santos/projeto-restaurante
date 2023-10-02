@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import enviroment from "../environments/enviroment";
 import { usersRoles } from "../utils/usersEnum";
+import api from "@utils/api";
 
 type user = {
   id: number;
@@ -30,7 +30,7 @@ const useGetUsersByRole = (role: usersRoles) => {
 
 const getUsersByRole = (role: usersRoles) => {
   return () =>
-    axios
+    api
       .get<getUsersByRoleRes>(
         `${enviroment.railway}adm/getall/${roleQuery[role]}/`
       )
