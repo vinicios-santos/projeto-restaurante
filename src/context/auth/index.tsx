@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { createContext } from "react";
 import { setCookie, parseCookies, destroyCookie } from "nookies";
 import api from "@utils/api";
@@ -11,7 +11,8 @@ type SignInCredentials = {
 
 interface AuthContextData {
   signIn: (credentials: SignInCredentials) => Promise<void>;
-  signOut: () => Promise<void>;
+  signOut: () => void;
+  token: string | null;
 }
 
 interface AuthProviderProps {
@@ -21,16 +22,20 @@ interface AuthProviderProps {
 export const AuthContext = createContext({} as AuthContextData);
 
 export function AuthProvider({ children }: AuthProviderProps) {
+  const [token, setToken] = useState<string | null>(null);
   useEffect(() => {
     const { "yellowsoftware.token": token } = parseCookies();
+    setToken(token);
     if (!token) {
       localStorage.clear();
+      setToken(null)
     }
   }, []);
 
-  async function signOut() {
+  function signOut() {
     destroyCookie(undefined, "yellowsoftware.token");
-    redirect("/");
+    setToken(null);
+    redirect('/')
   }
 
   async function signIn({ email, password }: SignInCredentials) {
@@ -38,14 +43,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
       email,
       senha: password,
     });
-    const { body: token, success, reasonPhrase } = response.data;
+    const { body, success, reasonPhrase } = response.data;
 
     if (!success) {
       throw new Error(reasonPhrase);
     }
+    const token = JSON.stringify(body);
 
     localStorage.setItem("token", JSON.stringify(token));
-
+    setToken(token)
     setCookie(undefined, "yellowsoftware.token", token, {
       maxAge: 60 * 60,
       path: "/",
@@ -56,7 +62,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }
 
   return (
-    <AuthContext.Provider value={{ signIn, signOut }}>
+    <AuthContext.Provider value={{ signIn, token, signOut }}>
       {children}
     </AuthContext.Provider>
   );
