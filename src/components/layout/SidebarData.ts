@@ -30,7 +30,7 @@ const SidebarData: SidebarDataType[] = [
     id: 3,
     description: "Reservas",
     icon: ClipboardText,
-    path: "/students",
+    path: "/teachers",
   },
   {
     id: 4,
@@ -42,25 +42,25 @@ const SidebarData: SidebarDataType[] = [
     id: 5,
     description: "Central",
     icon: Kanban,
-    path: "/students",
+    path: "/teachers",
   },
   {
     id: 6,
     description: "Menus",
     icon: AppWindow,
-    path: "/students",
+    path: "/menus",
   },
   {
     id: 7,
     description: "Configurações",
     icon: Gear,
-    path: "/students",
+    path: "/teachers",
   },
   {
     id: 8,
     description: "Feedbacks",
     icon: ChatCenteredDots,
-    path: "/students",
+    path: "/teachers",
   },
 ];
 

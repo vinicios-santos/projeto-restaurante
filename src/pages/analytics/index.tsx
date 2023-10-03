@@ -7,7 +7,7 @@ const Analytics = () => {
   return (
     <>
       <Welcome />
-      <div className="w-[100px] h-[100px] bg-lime-500 inline-block">
+      <div className="w-[300px] inline-block">
         <DateNow />
         <FilterGraphic />
       </div>

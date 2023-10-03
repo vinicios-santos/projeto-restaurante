@@ -35,7 +35,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
   function signOut() {
     destroyCookie(undefined, "yellowsoftware.token");
     setToken(null);
-    redirect('/')
+    redirect('/');
+    api.defaults.headers["Authorization"] = null;
+
   }
 
   async function signIn({ email, password }: SignInCredentials) {
